@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block cont %}
+<header class="home">
+    <div class="info">
+        <div class="slider">
+            <div class="slider-contenedor">
+                <section class="contenido-slider">
+                    <img src="{% static 'img/logo.png' %}" alt="">
+                    <div>
+
+                        <h2>P2P Play es la plataforma de apuestas deportivas que revoluciona el mercado. Aquí no
+                            apuestas contra la casa, sino contra otros usuarios como tú, que comparten tu pasión por el
+                            deporte.</h2>
+
+                    </div>
+
+
+                </section>
+                <section class="contenido-slider">
+                    <div>
+                        <h2>Elige tus eventos favoritos, haz tus pronósticos y gana. Entra a P2P Play
+                            y vive la experiencia de apostar y competir.</h2>
+                    
+                    </div>
+                    <img src="{% static 'img/sport.svg' %}" alt="">
+
+                </section>
+                <section class="contenido-slider">
+                    <div>
+                        <h2>P2P play te permite hablar por chat con 
+                            otros usuarios, compartir tus opiniones y consejos. ¿qué esperas? Entra a P2P Play y
+                            chatea con amantes de las apuestas como tu.</h2>
+                   
+                    </div>
+                    <img src="{% static 'img/chatf.svg' %}" alt="">
+
+                </section>
+                <!--<section class="contenido-slider">
+                    <div>
+                        <h2>P2P Play tambien te permite Hacer amigos </h2>
+                        <a href="#">Contact us</a>
+                    </div>
+                    <img src="animacion.svg" alt="">
+
+                </section>-->
+            </div>
+        </div>
+
+        <div class="slider-controls">
+            <button onclick="prevSlide()"><i class="fa-solid fa-angle-left"></i></button>
+            <button onclick="nextSlide()"><i class="fa-solid fa-angle-right"></i></button>
+        </div>
+
+    </div>
+
+
+
+    <div class="login">
+        <section class="signin">
+
+            <h3>Iniciar Session</h3>
+            <form method="POST">
+                {% csrf_token %}
+
+
+                <div class="inputBox">
+                    <span class="fas fa-user"></span>
+                    <input type="text" name="username" placeholder="Usuario Publico">
+                </div>
+                <div class="inputBox">
+                    <span class="fas fa-key"></span>
+                    <input type="password" name="password" id="password-in" placeholder="Contraseña">
+
+                    <span id="show-pass-in" class="fas fa-eye" onclick="signinPass();"></span>
+                    <span id="hide-pass-in" class="fas fa-low-vision" onclick="signinPass();"></span>
+                </div>
+
+                <input type="submit" value="Iniciar Seccion" class="btn">
+
+
+            </form>
+            <div class="signup-link">
+                <p>¿No tienes una cuenta?</p>
+                <a href="#" onclick="showSignup()">Registrarse</a>
+            </div>
+
+        </section>
+
+        <section class="signup" style="display: none;">
+
+            <h3>Registro</h3>
+
+            <!-- Barra de progreso -->
+            <div class="progress-bar">
+                <div class="step-number">1</div>
+                <div class="step-number">2</div>
+                <div class="step-number">3</div>
+            </div>
+
+
+
+            <form method="POST">
+                {% csrf_token %}
+
+
+                <!-- DIVISION UNO-->
+
+                <div class="step1">
+                    <div class="inputBox">
+                        <span class="fas fa-user"></span>
+                        <input type="text" name="name" placeholder="Nombre completo">
+                    </div>
+                    <div class="inputBox">
+                        <span class="fa-solid fa-envelope"></span>
+                        <input type="email" name="email" placeholder="Correo electronico">
+                    </div>
+                    <div class="inputBox">
+                        <span class="fa-solid fa-phone"></span>
+                        <input type="text" name="phone" placeholder="Telefono">
+                    </div>
+                    <div class="inputBox">
+                        <span class="fa-solid fa-location-dot"></span>
+                        <input type="text" name="addres" placeholder="Direccion Fisica">
+                    </div>
+
+                    <div class="navigation-buttons">
+                        <button type="button" onclick="nextStep()">Siguiente</button>
+                    </div>
+                </div>
+
+
+                <!--DIVISION DOS-->
+                <div class="step2" style="display: none;">
+                    <div class="inputBox">
+                        <span class="fa-solid fa-id-card"></span>
+                        <select name="documentType" id="documentType" required>
+                            <option value="" disabled selected hidden>Selecciona el tipo de documento</option>
+                            <option value="Cedula">Cedula de Ciudadania</option>
+                            <option value="passport">Pasaporte</option>
+                            <!-- Agrega más opciones según tus necesidades -->
+                        </select>
+                    </div>
+                    <div class="inputBox">
+                        <span class="fa-solid fa-id-card"></span>
+                        <input type="text" name="documentNumber" placeholder="numero de documento">
+                    </div>
+                    <div class="inputBox">
+                        <span class="fa-solid fa-calendar"></span>
+                        <input type="date" name="birthDate" placeholder="fecha de nacimiento">
+                    </div>
+                    <div class="inputBox">
+                        <span class="fa-solid fa-calendar"></span>
+                        <input type="date" name="expeditionDate" placeholder="Fecha de expedicion">
+                    </div>
+                    <div class="inputBox">
+                        <span class="fa-solid fa-location-dot"></span>
+                        <input type="text" name="expeditionPlace" placeholder="lugar de expedicion">
+                    </div>
+
+                    <div class="navigation-buttons">
+                        <button type="button" onclick="prevStep()">Anterior</button>
+                        <button type="button" onclick="nextStep()">Siguiente</button>
+                    </div>
+                </div>
+
+                <!--DIVISION 3-->
+                <div class="step3" style="display: none;">
+                    <div class="inputBox">
+                        <span class="fas fa-user"></span>
+                        <input type="text" name="username" placeholder="Usuario Publico">
+                    </div>
+                    <div class="inputBox">
+                        <span class="fas fa-key"></span>
+                        <input type="password" name="password" id="password-up" placeholder="Contraseña">
+
+                        <span id="show-pass-up" class="fas fa-eye" onclick="signupPass();"></span>
+                        <span id="hide-pass-up" class="fas fa-low-vision" onclick="signupPass();"></span>
+                    </div>
+                    <div class="navigation-buttons">
+                        <button type="button" onclick="prevStep()">Anterior</button>
+                        <input type="submit" value="Iniciar Seccion" class="btn">
+                    </div>
+
+                </div>
+
+
+
+            </form>
+
+            <div class="signin-link">
+                <p>¿Ya tienes una cuenta?</p>
+                <a href="#" onclick="showSignin()">Inicia Sesión</a>
+            </div>
+        </section>
+
+
+
+
+
+    </div>
+
+</header>
+
+
+
+
+
+{% endblock cont %}
